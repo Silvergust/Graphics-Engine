@@ -14,7 +14,7 @@ public:
 
 	bool shouldClose();
 
-	void swapBuffers();
+	void draw();
 private:
 	std::string _title;
 	int _width, _height;

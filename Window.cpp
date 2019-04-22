@@ -33,12 +33,22 @@ void Window::create(std::string title, int width, int height)
 	if (GLEWresult != GLEW_OK) {
 		fatalError("glewInit() error " + GLEWresult);
 	}
+
+	glClearColor(0.7f, 0.5f, 0.3f, 1.0f);
+	glViewport(0, 0, _width, _height);
+	glfwSetWindowTitle(_glfwWindow, "Test");
 }
 
 bool Window::shouldClose() {
 	return glfwWindowShouldClose(_glfwWindow);
 }
 
-void Window::swapBuffers() {
+void Window::draw() {
+	glClearColor(0.1f, 0.8f, 0.3f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
 	glfwSwapBuffers(_glfwWindow);
 }
+
+//void Window::SetClearColor() {
+//
+//}
