@@ -4,21 +4,23 @@
 #include "GLFW\glfw3.h"
 #include <string>
 
-class Window
-{
-public:
-	Window();
-	~Window();
+namespace Engine {
+	class Window
+	{
+	public:
+		Window();
+		~Window();
 
-	void create(std::string title, int width, int height);
+		void create(std::string title, int width, int height);
 
-	bool shouldClose();
+		bool shouldClose();
 
-	void draw();
-private:
-	std::string _title;
-	int _width, _height;
+		void draw();
+		void draw(GLfloat vertices[]);
+	private:
+		std::string _title;
+		int _width, _height;
 
-	GLFWwindow* _glfwWindow;
-};
-
+		GLFWwindow* _glfwWindow;
+	};
+}
