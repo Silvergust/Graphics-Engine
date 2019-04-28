@@ -17,6 +17,7 @@ namespace Engine {
 
 		void draw();
 		void draw(GLfloat vertices[]);
+
 	private:
 		std::string _title;
 		int _width, _height;

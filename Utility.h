@@ -25,9 +25,6 @@ namespace Engine {
 			file.close();
 		}
 		catch (std::exception exception) {
-			/*std::stringstream errorSS;
-			errorSS << "Failed to load shader " << fileName << "\n";
-			fatalError(errorSS.str());*/
 			std::cerr << "Failed to load file " << fileName << "\n";
 		}
 

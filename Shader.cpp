@@ -52,7 +52,8 @@ namespace Engine {
 			fatalError("Invalid Shader_Type argument in Shader::load().\n");
 		}
 
-		const GLchar* shaderSource = readFile(fileName).c_str();
+		std::string shaderString = readFile(fileName);
+		const GLchar* shaderSource = shaderString.c_str();
 
 		glShaderSource(shader, 1, &shaderSource, NULL);
 

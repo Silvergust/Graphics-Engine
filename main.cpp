@@ -5,6 +5,8 @@
 #include <glm\glm.hpp>
 #include "Shader.h"
 
+#include "Error.h"
+
 #define BUFFER_OFFSET(offset) ((void *)(offset))
 
 using namespace Engine;
@@ -26,33 +28,41 @@ int main() {
 	};*/
 
 	GLfloat testTriangleVertices[] = {
-		-0.5f, -0.5f,
-		0.0f,	0.5f,
-		0.5f,	-0.5f
+		-0.5f, -0.5f, 0.0f,
+		0.0f,	0.5f, 0.0f,
+		0.5f,	-1.0f, 0.0f
 	};
 
-	ShaderProgram program;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(testTriangleVertices),
+		testTriangleVertices, GL_STATIC_DRAW);
 
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+	glVertexAttribPointer(vPosition, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	glEnableVertexAttribArray(vPosition);
+
+	ShaderProgram program;
 	program.setup("pass_through.vs", "purple_flat.fs");
+
+	glCheckError();
 
 	while (!window->shouldClose()) {
 		glfwPollEvents();
 
-		glGenBuffers(1, &vbo);
-		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(testTriangleVertices),
-			testTriangleVertices, GL_STATIC_DRAW);
-
-		glGenVertexArrays(1, &vao);
-		glBindVertexArray(vao);
-		glVertexAttribPointer(vPosition, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-
-		glEnableVertexAttribArray(vPosition);
+		glClear(GL_COLOR_BUFFER_BIT);
 
 		program.use();
 
+		glBindVertexArray(vao);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glBindVertexArray(0);
+
+
 		window->draw();
-		//std::cout << "tick" << std::endl;
+		glCheckError();
+
 	}
 
 	glfwTerminate();

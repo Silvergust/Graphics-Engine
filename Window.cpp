@@ -13,6 +13,10 @@ namespace Engine {
 
 	void Window::create(std::string title, int width, int height)
 	{
+		_title = title;
+		_width = width;
+		_height = height;
+
 		int GLFWresult = glfwInit();
 		if (!GLFWresult) {
 			fatalError("glfwInit() error!");
@@ -37,7 +41,7 @@ namespace Engine {
 
 		glClearColor(0.7f, 0.5f, 0.3f, 1.0f);
 		glViewport(0, 0, _width, _height);
-		glfwSetWindowTitle(_glfwWindow, "Test");
+		glfwSetWindowTitle(_glfwWindow, _title.c_str());
 	}
 
 	bool Window::shouldClose() {
@@ -45,12 +49,8 @@ namespace Engine {
 	}
 
 	void Window::draw() {
-		glClearColor(0.1f, 0.8f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
 		glfwSwapBuffers(_glfwWindow);
 	}
 
-	//void Window::SetClearColor() {
-	//
-	//}
+
 }
