@@ -9,6 +9,10 @@ void fatalError(std::string string) {
 	exit(69);
 }
 
+void warning_(std::string string, const char *file, int line) {
+	std::cout << file << ", " << line << ": " << string << "\n";
+}
+
 GLenum glCheckError_(const char *file, int line)
 {
 	GLenum errorCode;

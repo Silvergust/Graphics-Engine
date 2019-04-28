@@ -39,7 +39,7 @@ int main() {
 
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
-	glVertexAttribPointer(vPosition, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	glVertexAttribPointer(vPosition, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
 	glEnableVertexAttribArray(vPosition);
 
 	ShaderProgram program;
@@ -52,7 +52,6 @@ int main() {
 		clearColor.a = 1.0f
 	};
 	window->setClearColor(clearColor);
-
 	glCheckError();
 
 	while (!window->shouldClose()) {
@@ -66,10 +65,8 @@ int main() {
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glBindVertexArray(0);
 
-
 		window->draw();
 		glCheckError();
-
 	}
 
 	glfwTerminate();
