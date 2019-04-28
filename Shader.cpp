@@ -39,8 +39,6 @@ namespace Engine {
 	}
 
 	bool ShaderProgram::loadShader(const char* fileName, Shader_Type type, GLuint& shader) {
-		//GLuint shader;
-
 		switch (type) {
 		case VERTEX:
 			shader = glCreateShader(GL_VERTEX_SHADER);
@@ -67,20 +65,6 @@ namespace Engine {
 	void ShaderProgram::use() {
 		glUseProgram(_id);
 	}
-
-	//bool ShaderProgram::checkError(GLuint shader, int errorCode) {
-	//	if (errorCode == GL_FALSE) {
-	//		GLint length = 0;
-	//		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length);
-
-	//		std::string log(length, ' ');
-	//		glGetProgramInfoLog(shader, length, &length, &log[0]);
-	//		std::cerr << "Failed to compile shader with error code "
-	//			<< log << "\n";
-	//		return false;
-	//	}
-	//	return true;
-	//}
 
 	void ShaderProgram::checkCompileError(GLuint shader) {
 		int errorCode = 0;

@@ -21,7 +21,6 @@ namespace Engine {
 	private:
 		GLuint _id;
 
-		//bool checkError(GLuint shader, int errorCode);
 		void checkCompileError(GLuint shader);
 		void checkLinkError(GLuint shader);
 	};

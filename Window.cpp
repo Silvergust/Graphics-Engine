@@ -52,5 +52,11 @@ namespace Engine {
 		glfwSwapBuffers(_glfwWindow);
 	}
 
+	void Window::setClearColor(Color color) {
+		glClearColor(color.r, color.g, color.b, color.a);
+	}
 
+	void Window::clear() {
+		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+	}
 }

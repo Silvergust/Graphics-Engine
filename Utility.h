@@ -4,7 +4,6 @@
 #include <sstream>
 #include <fstream>
 #include <string>
-//#include "Error.h"
 
 namespace Engine {
 	std::string readFile(const std::string& fileName) {
@@ -16,10 +15,10 @@ namespace Engine {
 
 			if (!file.fail()) {
 				stringStream << file.rdbuf();
-				std::cout << "Read file " << fileName << ", its contents are " << stringStream.str() << "\n";
+				std::cout << "Read file " << fileName << "\n";
 			}
 			else {
-				std::cout << "Failure to read file " << fileName << "\n";
+				std::cout << "Failed to read file " << fileName << "\n";
 			}
 
 			file.close();

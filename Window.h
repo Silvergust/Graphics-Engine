@@ -2,6 +2,7 @@
 #define GLEW_STATIC
 #include "GL\glew.h"
 #include "GLFW\glfw3.h"
+#include "Color.h"
 #include <string>
 
 namespace Engine {
@@ -17,6 +18,10 @@ namespace Engine {
 
 		void draw();
 		void draw(GLfloat vertices[]);
+
+		void setClearColor(Color color);
+
+		static void clear();
 
 	private:
 		std::string _title;

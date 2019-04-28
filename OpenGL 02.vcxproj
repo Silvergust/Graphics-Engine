@@ -126,6 +126,7 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Color.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Utility.h" />

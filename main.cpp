@@ -14,9 +14,8 @@ using namespace Engine;
 enum Attrib_IDs { vPosition = 0 };
 
 int main() {
-	std::cout << "Hello world!" << std::endl;
 	Window* window = new Window();
-	window->create("Hello world!", 720, 480);
+	window->create("Engine", 720, 480);
 
 	//GLuint VAOs[1];
 	GLuint vao, vbo;
@@ -46,12 +45,20 @@ int main() {
 	ShaderProgram program;
 	program.setup("pass_through.vs", "purple_flat.fs");
 
+	Color clearColor = {
+		clearColor.r = 0.1f,
+		clearColor.g = 0.2f,
+		clearColor.b = 0.8f,
+		clearColor.a = 1.0f
+	};
+	window->setClearColor(clearColor);
+
 	glCheckError();
 
 	while (!window->shouldClose()) {
 		glfwPollEvents();
 
-		glClear(GL_COLOR_BUFFER_BIT);
+		window->clear();
 
 		program.use();
 
