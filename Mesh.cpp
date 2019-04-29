@@ -5,6 +5,7 @@
 #include <assimp\postprocess.h>
 
 #include "Mesh.h"
+#include "Error.h"
 
 
 
@@ -12,14 +13,13 @@ Mesh::Mesh()
 {
 }
 
+Mesh::Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices) {
+	_vertices = vertices;
+	_indices = indices;
+}
+
 
 Mesh::~Mesh()
 {
 }
 
-void Mesh::import(std::string filePath) {
-	Assimp::Importer import;
-	const aiScene* scene = import.ReadFile(filePath, aiProcess_Triangulate);
-
-
-}

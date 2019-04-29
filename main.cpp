@@ -26,20 +26,28 @@ int main() {
 		{ GL_NONE, NULL }
 	};*/
 
-	GLfloat testTriangleVertices[] = {
+	/*GLfloat testTriangleVertices[] = {
 		-0.5f, -0.5f, 0.0f,
 		0.0f,	0.5f, 0.0f,
 		0.5f,	-1.0f, 0.0f
+	};*/
+	GLfloat testCubeVertices[] = {
+		-0.5f, -0.5f, 1.0f,
+		 0.5f, -0.5f, 1.0f,
+		-0.5f,  0.5f, 1.0f,
+		 0.5f,  0.5f, 1.0f,
+		-0.5f,  0.5f, 1.0f,
+		 0.5f,  -0.5f, 1.0f
 	};
 
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(testTriangleVertices),
-		testTriangleVertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(testCubeVertices),
+		testCubeVertices, GL_STATIC_DRAW);
 
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
-	glVertexAttribPointer(vPosition, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
+	glVertexAttribPointer(vPosition, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, BUFFER_OFFSET(0));
 	glEnableVertexAttribArray(vPosition);
 
 	ShaderProgram program;
@@ -62,7 +70,7 @@ int main() {
 		program.use();
 
 		glBindVertexArray(vao);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindVertexArray(0);
 
 		window->draw();

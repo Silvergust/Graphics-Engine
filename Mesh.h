@@ -22,10 +22,12 @@ class Mesh
 {
 public:
 	Mesh();
+	Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices);
 	~Mesh();
 
 private:
 	std::vector<Vertex> _vertices;
+	std::vector<GLuint> _indices;
 
 	void import(std::string filePath);
 };
