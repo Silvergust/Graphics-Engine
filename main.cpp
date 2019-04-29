@@ -4,6 +4,7 @@
 #include <string>
 #include <glm\glm.hpp>
 #include "Shader.h"
+#include "Model.h"
 
 #include "Error.h"
 
@@ -31,24 +32,33 @@ int main() {
 		0.0f,	0.5f, 0.0f,
 		0.5f,	-1.0f, 0.0f
 	};*/
-	GLfloat testCubeVertices[] = {
+	/*GLfloat testCubeVertices[] = {
 		-0.5f, -0.5f, 1.0f,
 		 0.5f, -0.5f, 1.0f,
 		-0.5f,  0.5f, 1.0f,
 		 0.5f,  0.5f, 1.0f,
 		-0.5f,  0.5f, 1.0f,
 		 0.5f,  -0.5f, 1.0f
-	};
+	};*/
+
+	Model* model = new Model();
+
+	model->importModel("C:/Users/ernrm/source/repos/OpenGL 02/Debug/suzanne.obj");
+
+	std::vector<Vertex> vertices = model->getMeshes()[0].getVertices();
 
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(testCubeVertices),
-		testCubeVertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertices.size(), &(vertices[0]), GL_STATIC_DRAW);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(testCubeVertices),
+	//	testCubeVertices, GL_STATIC_DRAW);
 
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
-	glVertexAttribPointer(vPosition, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, BUFFER_OFFSET(0));
+	//glVertexAttribPointer(vPosition, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, BUFFER_OFFSET(0));
 	glEnableVertexAttribArray(vPosition);
+	glVertexAttribPointer(vPosition, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)0);//BUFFER_OFFSET(0));
+	//glEnableVertexAttribArray(vPosition);
 
 	ShaderProgram program;
 	program.setup("pass_through.vs", "purple_flat.fs");
@@ -70,7 +80,7 @@ int main() {
 		program.use();
 
 		glBindVertexArray(vao);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 		glBindVertexArray(0);
 
 		window->draw();

@@ -1,4 +1,7 @@
 #pragma once
+#include <assimp\Importer.hpp>
+#include <assimp\scene.h>
+#include <assimp\postprocess.h>
 
 #include <string>
 #include <vector>
@@ -10,8 +13,10 @@ public:
 	Model();
 	~Model();
 
-	void import(std::string filePath);
+	void importModel(std::string filePath);
 
+	//GLfloat[] getVertices() { return }
+	std::vector<Mesh> getMeshes() { return _meshes; }
 private:
 	std::string _filePath;
 	std::vector<Mesh> _meshes;

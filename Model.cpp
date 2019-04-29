@@ -15,7 +15,7 @@ Model::~Model()
 {
 }
 
-void Model::import(std::string filePath) {
+void Model::importModel(std::string filePath) {
 	Assimp::Importer import;
 	const aiScene* scene = import.ReadFile(filePath, aiProcess_Triangulate);
 
@@ -51,12 +51,14 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
 		vertex.position.x = mesh->mVertices[i].x;
 		vertex.position.y = mesh->mVertices[i].y;
 		vertex.position.z = mesh->mVertices[i].z;
-		vertices.push_back(vertex);
 
 		if (mesh->mTextureCoords[0]) {
 			vertex.u = mesh->mTextureCoords[0][i].x;
 			vertex.v = mesh->mTextureCoords[0][i].y;
 		}
+		
+		vertices.push_back(vertex);
+
 	}
 
 	std::vector<unsigned int> indices;
