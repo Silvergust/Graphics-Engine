@@ -91,4 +91,8 @@ namespace Engine {
 			std::cerr << "Program linking error. Error log: " << errorLog << "\n";
 		}
 	}
+
+	void ShaderProgram::setUniform(const std::string &name, const glm::mat4 &mat) {
+		glUniformMatrix4fv(glGetUniformLocation(_id, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+	}
 }

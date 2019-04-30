@@ -2,6 +2,7 @@
 
 #include <string>
 #include <GL\glew.h>
+#include <glm\glm.hpp>
 
 namespace Engine {
 
@@ -18,6 +19,8 @@ namespace Engine {
 		bool loadShader(const char* fileName, Shader_Type type, GLuint& shader);
 
 		void use();
+
+		void setUniform(const std::string &name, const glm::mat4 &mat);
 	private:
 		GLuint _id;
 

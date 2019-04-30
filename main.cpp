@@ -5,6 +5,7 @@
 #include <glm\glm.hpp>
 #include "Shader.h"
 #include "Model.h"
+#include "Camera.h"
 
 #include "Error.h"
 
@@ -61,7 +62,7 @@ int main() {
 	//glEnableVertexAttribArray(vPosition);
 
 	ShaderProgram program;
-	program.setup("pass_through.vs", "purple_flat.fs");
+	program.setup("featureless.vs", "purple_flat.fs");
 
 	Color clearColor = {
 		clearColor.r = 0.1f,
@@ -72,12 +73,24 @@ int main() {
 	window->setClearColor(clearColor);
 	glCheckError();
 
+	Camera camera = Camera();
+
+	camera._position = glm::vec3(0.0f, 0.0f, 0.0f);
+
+	int frameCount = 0;
+
 	while (!window->shouldClose()) {
 		glfwPollEvents();
+
+		float frameFactor = frameCount * 0.001f;
+		camera._position = glm::vec3(cos(frameFactor), 0.0f, sin(frameFactor));
 
 		window->clear();
 
 		program.use();
+
+		glm::mat4 view = camera.getViewMatrix();
+		program.setUniform("viewMatrix", view);
 
 		glBindVertexArray(vao);
 		glDrawArrays(GL_TRIANGLES, 0, vertices.size());
@@ -85,6 +98,7 @@ int main() {
 
 		window->draw();
 		glCheckError();
+		frameCount++;
 	}
 
 	glfwTerminate();
