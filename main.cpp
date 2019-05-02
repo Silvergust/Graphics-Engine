@@ -73,9 +73,9 @@ int main() {
 	window->setClearColor(clearColor);
 	glCheckError();
 
-	Camera camera = Camera();
+	Camera camera = Camera(window);
 
-	camera._position = glm::vec3(0.0f, 0.0f, 0.0f);
+	camera._Position = glm::vec3();
 
 	int frameCount = 0;
 
@@ -83,7 +83,7 @@ int main() {
 		glfwPollEvents();
 
 		float frameFactor = frameCount * 0.001f;
-		camera._position = glm::vec3(cos(frameFactor), 0.0f, sin(frameFactor));
+		camera.cameraUpdate(window);
 
 		window->clear();
 
@@ -91,6 +91,7 @@ int main() {
 
 		glm::mat4 view = camera.getViewMatrix();
 		program.setUniform("viewMatrix", view);
+		program.setUniform("projectionMatrix", camera.getProjectionMatrix());
 
 		glBindVertexArray(vao);
 		glDrawArrays(GL_TRIANGLES, 0, vertices.size());

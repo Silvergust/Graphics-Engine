@@ -1,5 +1,6 @@
 #include "Window.h"
 #include <iostream>
+#include <unordered_map>
 #include "Error.h"
 
 namespace Engine {
@@ -58,5 +59,18 @@ namespace Engine {
 
 	void Window::clear() {
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+	}
+
+	//TODO: Consider moving to an input managing class
+	static std::unordered_map<Inputs, int> _KeyDict = {
+		{ W, GLFW_KEY_W },
+		{ A, GLFW_KEY_A },
+		{ S, GLFW_KEY_S },
+		{ D, GLFW_KEY_D },
+	};
+
+	bool Window::IsKeyDown(Inputs inputKey) {
+		bool value = glfwGetKey(_glfwWindow, _KeyDict[inputKey]) == GLFW_PRESS;
+		return value;
 	}
 }

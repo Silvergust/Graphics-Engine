@@ -6,6 +6,8 @@
 #include <string>
 
 namespace Engine {
+	enum Inputs { W, A, S, D };
+
 	class Window
 	{
 	public:
@@ -17,11 +19,14 @@ namespace Engine {
 		bool shouldClose();
 
 		void draw();
-		void draw(GLfloat vertices[]);
 
 		void setClearColor(Color color);
 
+		GLFWwindow* getGLFWWindow() { return _glfwWindow; }
+
 		static void clear();
+
+		bool IsKeyDown(Inputs inputKey);
 
 	private:
 		std::string _title;
