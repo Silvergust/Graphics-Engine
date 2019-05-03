@@ -13,9 +13,11 @@ Mesh::Mesh()
 {
 }
 
-Mesh::Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices) {
-	_vertices = vertices;
-	_indices = indices;
+Mesh::Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Material> materials) {//std::vector<Texture> textures) {
+	_Vertices = vertices;
+	_Indices = indices;
+	//_Textures = textures;
+	_Materials = materials;
 }
 
 
